@@ -1,0 +1,35 @@
+body {
+    background-color: #7FFFD4;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+.flashErr {
+    color: red;
+}
+
+div.input {
+    background-color: white;
+    border-radius: 15px;
+    border-style: solid;
+    height: 10em;
+}
+div.field {
+  border-style: solid;
+  background-color: white;
+  border-radius: 15px;
+
+}
+ul,li {
+  text-align: center;
+}
+
+form {
+    width: 10em;
+}

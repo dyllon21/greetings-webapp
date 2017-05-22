@@ -26,7 +26,9 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "express-flash": "git://github.com/RGBboy/express-flash.git",
     "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.3",
     "handlebars": "^4.0.6",
     "nodemon": "^1.11.0"
   },

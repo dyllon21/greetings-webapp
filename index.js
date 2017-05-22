@@ -3,6 +3,8 @@
  const express = require('express');
  const exphbs = require('express-handlebars');
  const bodyParser = require('body-parser');
+ const flash = require('express-flash');
+ const session = require('express-session');
 
 
  var GreetingRoutes = require('./greetings');
@@ -19,12 +21,15 @@ app.get('/', function(req, res){
 });
 
 app.use(express.static('public'))
-app.use(express.static('views'))
+ // app.use(express.static('views'))
 
 //parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 //parse application json
 app.use(bodyParser.json())
+
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 * 30 }}));
+app.use(flash());
 
 
 
@@ -61,7 +66,7 @@ app.listen(port, function(){
 //
 //
 //
-// var greetedNames = {}
+var greetedNames = {}
 //
 // app.param('name', function(req, res, next, name) {
 //     var modified = name + '-dude';
@@ -70,15 +75,15 @@ app.listen(port, function(){
 //     next();
 // });
 //
-// //routes here:
-// app.get('/greetings/:name', function(req, res) {
-//     if (greetedNames[req.params.name]) {
-//         greetedNames[req.params.name]++;
-//     } else {
-//         greetedNames[req.params.name] = 1;
-//     }
-//     res.send('<h1>Hello, ' + req.params.name);
-// });
+//routes here:
+app.get('/greetings/:name', function(req, res) {
+    if (greetedNames[req.params.name]) {
+        greetedNames[req.params.name]++;
+    } else {
+        greetedNames[req.params.name] = 1;
+    }
+    res.send('<h1>Hello, ' + req.params.name);
+});
 //
 // app.get('/greeted', function(req, res) {
 //     var namesGreeted = [];

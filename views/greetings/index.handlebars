@@ -1,9 +1,21 @@
-<h1>Greetings</h1>
+<div class='input'>
+    <h1>Greetings!</h1>
 
-<a href='/greetings/add'>Add greeting</a>
-
-<ul>
-    {{#each greetings}}
-        <li>{{this}}</li>
-    {{/each}}
-</ul>
+    {{#if messages.error}}
+        <div class='flashErr'>
+            <h2>{{messages.error}}</h2>
+            <br>
+            <br>
+        </div>
+        <br>
+        <br>
+        <div class='field'>
+    {{/if}}
+    <a href='/greetings/add'>Add greeting</a>
+    <ul>
+        {{#each greetings}}
+            <li>{{this}}</li>
+        {{/each}}
+    </ul>
+    </div>
+</div>
