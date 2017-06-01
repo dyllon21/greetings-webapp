@@ -1,12 +1,19 @@
 body {
-    background-color: #7FFFD4;
+    background-color: #808080;
+    align: center;
+}
+
+a {
+    padding-left: 40em;
 }
 
 h1 {
+    color: silver;
     text-align: center;
 }
 
 h2 {
+    color: red;
     text-align: center;
 }
 
@@ -14,22 +21,68 @@ h2 {
     color: red;
 }
 
+
 div.input {
     background-color: white;
-    border-radius: 15px;
+    border-radius: 1em;
     border-style: solid;
-    height: 10em;
+    height: 15em;
 }
-div.field {
-  border-style: solid;
-  background-color: white;
-  border-radius: 15px;
 
+div.field {
+    float: inherit;
+    border-style: solid;
+    background-color: white;
+    border-radius: 15px;
+    height: 20em;
 }
-ul,li {
-  text-align: center;
+
+ul, li {
+    margin-left: 0em;
+    text-align: center;
 }
 
 form {
     width: 10em;
+    padding-left: 40em;
+    text-align: center;
+    /*float: center;*/
+}
+
+.radio {
+    animation-direction: normal;
+}
+
+input {
+    float: center;
+    padding: 1em;
+    margin: 40em;
+    border-radius: 30em;
+    -webkit-box-shadow: 1px 1px 1px 1px grey;
+    -moz-box-shadow: 1px 1px 1px 1px grey;
+    box-shadow: 1px 1px 1px 1px grey;
+    -webkit-transition: 300ms ease-in-out;
+    -moz-transition: 300ms ease-in-out;
+    transition: 300ms ease-in-out;
+    margin: 0px -40px;
+}
+
+input:hover {
+    padding-left: 2em;
+    position: static;
+    background-color: #4BABBD;
+    cursor: pointer;
+    -webkit-box-shadow: 1px 1px 1px 1px grey;
+    -moz-box-shadow: 1px 1px 1px 1px grey;
+    box-shadow: 1px 1px 1px 1px grey;
+    -webkit-transition: 300ms ease-in-out;
+    -moz-transition: 300ms ease-in-out;
+    transition: 300ms ease-in-out;
+    margin: 0px -40px;
+}
+
+.header {
+    background-color: black;
+    background-position: center;
+    border-radius: 15em;
 }

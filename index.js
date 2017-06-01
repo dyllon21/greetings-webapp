@@ -8,7 +8,6 @@
 
 
  var GreetingRoutes = require('./greetings');
-
 var greetingRoutes = GreetingRoutes();
 
  var app = express();
@@ -33,9 +32,28 @@ app.use(flash());
 
 
 
+//
+// app.param('name', function(req, res, next, name) {
+//     var modified = name + '-dude';
+//     req.name = modified;
+//
+//     next();
+// });
+//
+//routes here:
+// var greetedNames = {}
+// app.get('/greetings/:name', function(req, res) {
+//   if (greetedNames[req.params.name]) {
+//     greetedNames[req.params.name]++;
+//   } else {
+//     greetedNames[req.params.name] = 1;
+//   }
+//   res.send('<h1>Hello, ' + req.params.name);
+// });
+
+
 app.get('/greetings', greetingRoutes.index);
-app.get('/greetings/add', greetingRoutes.addScreen);
-app.post('/greetings/add', greetingRoutes.add);
+app.post('/greetings', greetingRoutes.add);
 
 
 
@@ -66,24 +84,6 @@ app.listen(port, function(){
 //
 //
 //
-var greetedNames = {}
-//
-// app.param('name', function(req, res, next, name) {
-//     var modified = name + '-dude';
-//     req.name = modified;
-//
-//     next();
-// });
-//
-//routes here:
-app.get('/greetings/:name', function(req, res) {
-    if (greetedNames[req.params.name]) {
-        greetedNames[req.params.name]++;
-    } else {
-        greetedNames[req.params.name] = 1;
-    }
-    res.send('<h1>Hello, ' + req.params.name);
-});
 //
 // app.get('/greeted', function(req, res) {
 //     var namesGreeted = [];
@@ -92,7 +92,7 @@ app.get('/greetings/:name', function(req, res) {
 //     }
 //     res.send('Names greeted: ' + namesGreeted);
 // });
-//
+// //
 // app.get('/counter/:name', function(req, res) {
 //
 //     res.send(req.params.name + ' has been greeted ' + greetedNames[req.params.name] + ' times');

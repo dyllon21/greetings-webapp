@@ -1,5 +1,4 @@
 //send data to the server:
-
 module.exports = function() {
 
     const greetList = [];
@@ -10,16 +9,16 @@ module.exports = function() {
         });
     };
 
-    const addScreen = function(req, res) {
-        res.render('greetings/greetings');
-    }
+    // const addScreen = function(req, res) {
+    //     res.render('greetings/greetings');
+    // }
+
 
     const add = function(req, res) {
         // res.send('Add a greeting');
 
         // var greeting = req.params.greeting;
         var greeting = req.body.greeting;
-
 
         var foundGreeting = greetList.find(function(currentGreeting) {
             return currentGreeting === greeting;
@@ -32,7 +31,7 @@ module.exports = function() {
                 greetList.push(greeting);
 
             } else if (!foundGreeting) {
-                req.flash('error',  'name successfully greeted')
+                req.flash('error', 'name successfully greeted')
             } else {
                 req.flash('error', 'has already been greeted');
             }
@@ -43,10 +42,74 @@ module.exports = function() {
 
     return {
         index,
-        add,
-        addScreen
+        add
     }
 }
+// module.exports = function() {
+//
+//     const greetList = [];
+//
+//     //
+//     // const greeted = function(req, res) {
+//     //   res.render('greetings/index', {
+//     //     greeted: greetList
+//     //   });
+//     // };
+//     // const counter = function(req, res) {
+//     //     res.render('greetungs/index', {
+//     //         counter: greetList
+//     //     });
+//     // };
+//
+//
+//     const index = function(req, res) {
+//         res.render('greetings/index', {
+//             greetings: greetList
+//         });
+//     };
+//
+// ////greetingScreen page////
+//     const addScreen = function(req, res) {
+//         res.render('greetings/greetings');
+//     }
+//
+//     const add = function(req, res) {
+//         // res.send('Add a greeting');
+//
+//         // var greeting = req.params.greeting;
+//         var greeting = req.body.greeting;
+//         // var greeted = req.body.greeted;
+//         // var counter = req.body.counter;
+//
+//
+//         var foundGreeting = greetList.find(function(currentGreeting) {
+//             return currentGreeting === greeting;
+//         });
+//
+//         if (!greeting) {
+//             req.flash('error', 'name should not be blank')
+//         } else {
+//             if (!foundGreeting) {
+//                 greetList.push(greeting);
+//
+//             } else if (!foundGreeting) {
+//                 req.flash('error',  'name successfully greeted')
+//             } else {
+//                 req.flash('error', 'has already been greeted');
+//             }
+//         }
+//
+//         res.redirect('/greetings');
+//     }
+//
+//     return {
+//         index,
+//         // greeted,
+//         // counter,
+//         add,
+//         addScreen
+//     }
+// }
 
 //     var name = req.query.name;
 //

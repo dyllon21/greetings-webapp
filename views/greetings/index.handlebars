@@ -1,4 +1,34 @@
+<h1>Greet Web Form</h1>
+
 <div class='input'>
+  {{#if messages.error}}
+      <div class='flashErr'>
+          <h2>{{messages.error}}</h2>
+          <br>
+          <br>
+      </div>
+  {{/if}}
+    <form class='' action='/greetings' method='post'>
+        <input type="text" name="greeting" placeholder="type ur name here">
+        <br>
+        <div class='radio'>
+            <span>
+  <input type="radio" name="language" value="english"/>
+  <label>English</label>
+  <br>
+  <input type="radio" name="language" value="afrikaans"/>
+  <label>Afrikaans</label>
+  <br>
+  <input type="radio" name="language" value="columbia"/>
+  <label>Columbia</label>
+</span>
+
+        </div>
+        <input type='submit' name='greetBtn' value='Greet Me!'>
+    </form>
+</div>
+
+<!-- <div class='input'>
     <h1>Greetings!</h1>
 
     {{#if messages.error}}
@@ -14,8 +44,29 @@
     <a href='/greetings/add'>Add greeting</a>
     <ul>
         {{#each greetings}}
-            <li>{{this}}</li>
+            <li>Hello, {{this}}</li>
         {{/each}}
     </ul>
     </div>
-</div>
+</div> -->
+
+<!--
+ <div class='input'>
+    <h1>Greetings!</h1>
+    <hr>
+
+    {{#if messages.error}}
+        <div class='flashErr'>
+            <h2>{{messages.error}}</h2>
+            <br>
+            <br>
+        </div>
+    {{/if}}
+    <a href='/greetings/add'><b>Add greeting</b></a>
+    <ul>
+        {{#each greetings}}
+            <li><b>Hello, {{this}}</b></li>
+
+        {{/each}}
+    </ul>
+</div>  -->
