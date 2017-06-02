@@ -6,7 +6,6 @@
  const flash = require('express-flash');
  const session = require('express-session');
 
-
  var GreetingRoutes = require('./greetings');
 var greetingRoutes = GreetingRoutes();
 
@@ -15,10 +14,10 @@ var greetingRoutes = GreetingRoutes();
  app.engine('handlebars', exphbs({defaultLayout: 'main'}));
  app.set('view engine', 'handlebars');
 
-app.get('/', function(req, res){
-  res.send('letsGreet');
-});
-
+// app.get('/', function(req, res){
+//   res.send('letsGreet');
+// });
+//
 app.use(express.static('public'))
  // app.use(express.static('views'))
 
@@ -32,8 +31,7 @@ app.use(flash());
 
 
 
-//
-// app.param('name', function(req, res, next, name) {
+//// app.param('name', function(req, res, next, name) {
 //     var modified = name + '-dude';
 //     req.name = modified;
 //
@@ -41,15 +39,15 @@ app.use(flash());
 // });
 //
 //routes here:
-// var greetedNames = {}
-// app.get('/greetings/:name', function(req, res) {
-//   if (greetedNames[req.params.name]) {
-//     greetedNames[req.params.name]++;
-//   } else {
-//     greetedNames[req.params.name] = 1;
-//   }
-//   res.send('<h1>Hello, ' + req.params.name);
-// });
+var greetedNames = {}
+app.get('/greetings/:name', function(req, res) {
+  if (greetedNames[req.params.name]) {
+    greetedNames[req.params.name]++;
+  } else {
+    greetedNames[req.params.name] = 1;
+  }
+  res.send('<h1>Hello, ' + req.params.name);
+});
 
 
 app.get('/greetings', greetingRoutes.index);
@@ -63,41 +61,20 @@ app.listen(port, function(){
   console.log('web app started on port : ' + port);
 });
 
-// var bodyParser = require('body-parser');
-// var express_handlebars = require('express-handlebars');
-// // var app = expess();
-// var port = process.env.PORT || 8080;
-//
+app.get('/greeted', function(req, res) {
+    var namesGreeted = [];
+    for (let name in greetedNames) {
+        namesGreeted.push('<a href="/counter/' + name + '">' + name + '</a><br />');
+    }
+    res.render('greeted', {namesGreeted});
+  //  res.send('Names greeted: ' + namesGreeted);
+});
 // //
-//  app.use(bodyParser.urlencoded({
-//      extended: false
-//  }));
-//
-// app.use(bodyParser.json());
-// app.use(express.static('public'))
-// app.use(express.static('views'))
-//
-// app.engine('handlebars', express_handlebars({
-//     defaultLayout: 'main'
-// }));
-// app.set('view engine', 'handlebars');
-//
-//
-//
-//
-// app.get('/greeted', function(req, res) {
-//     var namesGreeted = [];
-//     for (let name in greetedNames) {
-//         namesGreeted.push(name);
-//     }
-//     res.send('Names greeted: ' + namesGreeted);
-// });
-// //
-// app.get('/counter/:name', function(req, res) {
-//
-//     res.send(req.params.name + ' has been greeted ' + greetedNames[req.params.name] + ' times');
-//
-// });
+app.get('/counter/:name', function(req, res) {
+
+    res.send(req.params.name + ' has been greeted ' + greetedNames[req.params.name] + ' times');
+
+});
 // app.get('/api/users/:name', function(req, res) {
 //     var user_id = req.param('id');
 //     var token = req.param('token');

@@ -2,9 +2,21 @@ body {
     background-color: #808080;
     align: center;
 }
+.header {
+  float: center;
+  padding: 1em;
+  color: white;
+  background-color: black;
+  text-align: center;
+  font-family: sans-serif;
+  font-size-adjust: auto;
+  border-spacing:12em;
+}
 
-a {
-    padding-left: 40em;
+.a {
+  float: right;
+  text-color: red;
+    padding-center: 4em;
 }
 
 h1 {
@@ -21,12 +33,32 @@ h2 {
     color: red;
 }
 
+div.input2 {
+    background-color: #000000;
+    /*border-radius: 1em;*/
+    border-style: solid;
+    height: 15em;
+}
+div.radio{
+/*color : #ffffff;*/
+font-family: sans-serif;
+align-items:;
+}
+label{
+  color: lightgreen;
+  display: inline-block;
+
+}
+
 
 div.input {
     background-color: white;
     border-radius: 1em;
     border-style: solid;
     height: 15em;
+}
+div.field2,input {
+  border-radius: 10px;
 }
 
 div.field {
@@ -37,7 +69,7 @@ div.field {
     height: 20em;
 }
 
-ul, li {
+.ul, .li {
     margin-left: 0em;
     text-align: center;
 }
@@ -48,41 +80,10 @@ form {
     text-align: center;
     /*float: center;*/
 }
-
-.radio {
-    animation-direction: normal;
-}
-
-input {
-    float: center;
-    padding: 1em;
-    margin: 40em;
-    border-radius: 30em;
-    -webkit-box-shadow: 1px 1px 1px 1px grey;
-    -moz-box-shadow: 1px 1px 1px 1px grey;
-    box-shadow: 1px 1px 1px 1px grey;
-    -webkit-transition: 300ms ease-in-out;
-    -moz-transition: 300ms ease-in-out;
-    transition: 300ms ease-in-out;
-    margin: 0px -40px;
-}
-
-input:hover {
-    padding-left: 2em;
-    position: static;
-    background-color: #4BABBD;
-    cursor: pointer;
-    -webkit-box-shadow: 1px 1px 1px 1px grey;
-    -moz-box-shadow: 1px 1px 1px 1px grey;
-    box-shadow: 1px 1px 1px 1px grey;
-    -webkit-transition: 300ms ease-in-out;
-    -moz-transition: 300ms ease-in-out;
-    transition: 300ms ease-in-out;
-    margin: 0px -40px;
-}
-
-.header {
-    background-color: black;
-    background-position: center;
-    border-radius: 15em;
+input{
+  padding: 0.5em;
+  border-radius: 5em;
+  width: 12em;
+  border-style: solid;
+  color: chocolate;
 }

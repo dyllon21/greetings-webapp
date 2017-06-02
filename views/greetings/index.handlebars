@@ -1,15 +1,26 @@
-<h1>Greet Web Form</h1>
+<html>
+<head>
+  <link rel="stylesheet" href="/style.css">
 
-<div class='input'>
+</head>
+<body>
+<div class='header'>
+  <h1>Greet Web Form</h1>
+  <a href='/greeted'>namesGreeted</a>
+</div>
+<hr>
+
+<div class='input2'>
   {{#if messages.error}}
       <div class='flashErr'>
           <h2>{{messages.error}}</h2>
-          <br>
-          <br>
       </div>
   {{/if}}
-    <form class='' action='/greetings' method='post'>
+  <form class='' action='/greetings' method='post'>
+  <div class='field2'>
         <input type="text" name="greeting" placeholder="type ur name here">
+</div>
+        <br>
         <br>
         <div class='radio'>
             <span>
@@ -24,49 +35,8 @@
 </span>
 
         </div>
+        <br>
         <input type='submit' name='greetBtn' value='Greet Me!'>
     </form>
 </div>
-
-<!-- <div class='input'>
-    <h1>Greetings!</h1>
-
-    {{#if messages.error}}
-        <div class='flashErr'>
-            <h2>{{messages.error}}</h2>
-            <br>
-            <br>
-        </div>
-        <br>
-        <br>
-        <div class='field'>
-    {{/if}}
-    <a href='/greetings/add'>Add greeting</a>
-    <ul>
-        {{#each greetings}}
-            <li>Hello, {{this}}</li>
-        {{/each}}
-    </ul>
-    </div>
-</div> -->
-
-<!--
- <div class='input'>
-    <h1>Greetings!</h1>
-    <hr>
-
-    {{#if messages.error}}
-        <div class='flashErr'>
-            <h2>{{messages.error}}</h2>
-            <br>
-            <br>
-        </div>
-    {{/if}}
-    <a href='/greetings/add'><b>Add greeting</b></a>
-    <ul>
-        {{#each greetings}}
-            <li><b>Hello, {{this}}</b></li>
-
-        {{/each}}
-    </ul>
-</div>  -->
+</body>
