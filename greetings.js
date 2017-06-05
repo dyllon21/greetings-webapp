@@ -4,8 +4,8 @@ module.exports = function() {
     const greetList = [];
 
     const greeted = function(req, res) {
-        res.send('greeting/greeted', {
-            namesGreeted: greetList
+        res.render('greetings/index', {
+        greetings: greetList
         });
     };
 
@@ -31,6 +31,8 @@ module.exports = function() {
             // }
 
         });
+
+
         console.log(foundGreeting);
         if (greeting === '') {
             req.flash('error', 'name should not be blank')
@@ -50,5 +52,6 @@ module.exports = function() {
         index,
         add,
         greeted
+        // counter
     }
 }

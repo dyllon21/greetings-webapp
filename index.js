@@ -1,6 +1,7 @@
 'use strict';
 
  const express = require('express');
+ const app = express();
  const exphbs = require('express-handlebars');
  const bodyParser = require('body-parser');
  const flash = require('express-flash');
@@ -9,7 +10,6 @@
  var GreetingRoutes = require('./greetings');
 var greetingRoutes = GreetingRoutes();
 
- var app = express();
 
  app.engine('handlebars', exphbs({defaultLayout: 'main'}));
  app.set('view engine', 'handlebars');
@@ -49,7 +49,11 @@ app.get('/greetings/:name', function(req, res) {
   res.send('<h1>Hello, ' + req.params.name);
 });
 
+// app.get('/greeted', greetingRoutes.index);
+// app.post('/greeted', greetingRoutes.add);
 
+
+// app.get('/greeted', greetingRoutes.add);
 app.get('/greetings', greetingRoutes.index);
 app.post('/greetings', greetingRoutes.add);
 
@@ -67,7 +71,7 @@ app.get('/greeted', function(req, res) {
         namesGreeted.push('<a href="/counter/' + name + '">' + name + '</a><br />');
     }
     res.render('greeted', {namesGreeted});
-  //  res.send('Names greeted: ' + namesGreeted);
+  //  res.render('Names greeted: ' + namesGreeted);
 });
 // //
 app.get('/counter/:name', function(req, res) {

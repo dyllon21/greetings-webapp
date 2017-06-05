@@ -1,29 +1,30 @@
 <html>
+
 <head>
-  <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style.css">
 
 </head>
-<body>
-<div class='header'>
-  <h1>Greet Web Form</h1>
-  <a href='/greeted'>namesGreeted</a>
-</div>
-<hr>
 
-<div class='input2'>
-  {{#if messages.error}}
-      <div class='flashErr'>
-          <h2>{{messages.error}}</h2>
-      </div>
-  {{/if}}
-  <form class='' action='/greetings' method='post'>
-  <div class='field2'>
-        <input type="text" name="greeting" placeholder="type ur name here">
-</div>
-        <br>
-        <br>
-        <div class='radio'>
-            <span>
+<body>
+    <div class='header'>
+        <h1>Greet Web Form</h1>
+        <a href='/greeted'>namesGreeted</a>
+    </div>
+    <hr>
+
+    <div class='input2'>
+        {{#if messages.error}}
+            <div class='flashErr'>
+                <h2>{{messages.error}}</h2>
+            </div>
+        {{/if}}
+        <form class='' action='/greetings' method='post'>
+            <div class='field2'>
+                <input type="text" name="greeting" placeholder="type ur name here">
+            </div>
+            <br>
+            <div class='radio'>
+                <span>
   <input type="radio" name="language" value="english"/>
   <label>English</label>
   <br>
@@ -33,10 +34,20 @@
   <input type="radio" name="language" value="columbia"/>
   <label>Columbia</label>
 </span>
+<br>
+<br>
 
-        </div>
-        <br>
-        <input type='submit' name='greetBtn' value='Greet Me!'>
-    </form>
-</div>
+            </div>
+            <input type='submit' name='greetBtn' value='Greet Me!'>
+        </form>
+    </div>
+    <hr>
+    <br>
+    <div class='greetings'>
+        <ul>
+            {{#each greetings}}
+                <li>Hello, {{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
 </body>

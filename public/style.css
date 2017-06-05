@@ -2,8 +2,9 @@ body {
     background-color: #808080;
     align: center;
 }
-.header {
-  float: center;
+div.header {
+  /*align-content: center;*/
+  /*float: center;*/
   padding: 1em;
   color: white;
   background-color: black;
@@ -14,8 +15,7 @@ body {
 }
 
 .a {
-  float: right;
-  text-color: red;
+  float: left;
     padding-center: 4em;
 }
 
@@ -37,7 +37,7 @@ div.input2 {
     background-color: #000000;
     /*border-radius: 1em;*/
     border-style: solid;
-    height: 15em;
+    height: 20em;
 }
 div.radio{
 /*color : #ffffff;*/
@@ -60,6 +60,14 @@ div.input {
 div.field2,input {
   border-radius: 10px;
 }
+div.viewLinks {
+  float: center;
+  padding-right: 15em;
+}
+div.greetings {
+  border-style: solid;
+  background-color: #f0f0f0;
+}
 
 div.field {
     float: inherit;
@@ -69,9 +77,12 @@ div.field {
     height: 20em;
 }
 
-.ul, .li {
+ul, li {
+  color: darkgreen;
+  font-family: sans-serif;;
     margin-left: 0em;
     text-align: center;
+    text-decoration-color: white;
 }
 
 form {
@@ -85,5 +96,5 @@ input{
   border-radius: 5em;
   width: 12em;
   border-style: solid;
-  color: chocolate;
+  color: green;
 }

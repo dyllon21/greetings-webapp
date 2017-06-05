@@ -1,25 +1,10 @@
 <html>
-<!-- <link /rel="stylesheet" href="/style.css"> -->
+<link /rel="stylesheet" href="/style.css">
 
 
 <div class='input'>
     <h1>Greetings!</h1>
 
-    {{#if messages.error}}
-        <div class='flashErr'>
-            <h2>{{messages.error}}</h2>
-            <br>
-            <br>
-        </div>
-
-        <div class='field'>
-    {{/if}}
-    <a href='/greetings'>Add greeting</a>
-    <ul>
-        {{#each greetings}}
-            <li>Hello, {{this}}</li>
-        {{/each}}
-    </ul>
+    <a href='/greeted'>Add greeting</a>
     </div>
-</div>
 </html>
