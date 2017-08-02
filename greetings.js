@@ -5,7 +5,7 @@ module.exports = function() {
 
     const greeted = function(req, res) {
         res.render('greetings/index', {
-        greetings: greetList
+            greetings: greetList
         });
     };
 
@@ -24,24 +24,18 @@ module.exports = function() {
             return currentGreeting === greeting;
 
 
-            // if (foundGreeting === greetList[]){
-            //   return true;
-            // }else if (!foundGreeting === undefined) {
-            //   return false;
-            // }
-
         });
 
 
         console.log(foundGreeting);
         if (greeting === '') {
-            req.flash('error', 'name should not be blank')
+            req.flash('error', 'please confirm your name!')
         } else {
             if (!foundGreeting) {
                 greetList.push(greeting);
-                req.flash('success', 'name successfully greeted')
+                req.flash('success', 'name successfully greeted!')
             } else {
-                req.flash('error', 'has already been greeted');
+                req.flash('error', 'this person has already been greeted');
             }
         }
 
@@ -50,8 +44,8 @@ module.exports = function() {
 
     return {
         index,
-        add,
-        greeted
+        greeted,
+        add
         // counter
     }
 }

@@ -1,32 +1,41 @@
 'use strict';
 
- const express = require('express');
- const app = express();
- const exphbs = require('express-handlebars');
- const bodyParser = require('body-parser');
- const flash = require('express-flash');
- const session = require('express-session');
+const express = require('express');
+const app = express();
+const exphbs = require('express-handlebars');
+const bodyParser = require('body-parser');
+const flash = require('express-flash');
+const session = require('express-session');
 
- var GreetingRoutes = require('./greetings');
+var GreetingRoutes = require('./greetings');
 var greetingRoutes = GreetingRoutes();
 
 
- app.engine('handlebars', exphbs({defaultLayout: 'main'}));
- app.set('view engine', 'handlebars');
+app.engine('handlebars', exphbs({
+    defaultLayout: 'main'
+}));
+app.set('view engine', 'handlebars');
 
 // app.get('/', function(req, res){
 //   res.send('letsGreet');
 // });
 //
 app.use(express.static('public'))
- // app.use(express.static('views'))
+app.use(express.static('views'))
 
 //parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
 //parse application json
 app.use(bodyParser.json())
 
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 * 30 }}));
+app.use(session({
+    secret: 'keyboard cat',
+    cookie: {
+        maxAge: 60000 * 30
+    }
+}));
 app.use(flash());
 
 
@@ -38,46 +47,44 @@ app.use(flash());
 //     next();
 // });
 //
+
 //routes here:
-var greetedNames = {}
+const greetedNames = [];
 app.get('/greetings/:name', function(req, res) {
-  if (greetedNames[req.params.name]) {
-    greetedNames[req.params.name]++;
-  } else {
-    greetedNames[req.params.name] = 1;
-  }
-  res.send('<h1>Hello, ' + req.params.name);
+    if (greetedNames[req.params.name]) {
+        greetedNames[req.params.name]++;
+    } else {
+        greetedNames[req.params.name] = 1;
+    }
+    res.send('<h1>hello, ' + req.params.name);
 });
-
-// app.get('/greeted', greetingRoutes.index);
-// app.post('/greeted', greetingRoutes.add);
-
-
-// app.get('/greeted', greetingRoutes.add);
+// app.get('/counter', greetingRoutes.add);
 app.get('/greetings', greetingRoutes.index);
 app.post('/greetings', greetingRoutes.add);
 
 
-
-const port = 3000;
-
-app.listen(port, function(){
-  console.log('web app started on port : ' + port);
-});
 
 app.get('/greeted', function(req, res) {
     var namesGreeted = [];
     for (let name in greetedNames) {
         namesGreeted.push('<a href="/counter/' + name + '">' + name + '</a><br />');
     }
-    res.render('greeted', {namesGreeted});
-  //  res.render('Names greeted: ' + namesGreeted);
+    res.render('greeted', {
+        namesGreeted
+    });
+    //  res.render('Names greeted: ' + namesGreeted);
 });
-// //
+
 app.get('/counter/:name', function(req, res) {
 
-    res.send(req.params.name + ' has been greeted ' + greetedNames[req.params.name] + ' times');
+    res.render(req.params.name + ' has been greeted ' + greetedNames[req.params.name] + ' times');
 
+});
+
+const port = 3000;
+
+app.listen(port, function() {
+    console.log('web app started on port : ' + port);
 });
 // app.get('/api/users/:name', function(req, res) {
 //     var user_id = req.param('id');

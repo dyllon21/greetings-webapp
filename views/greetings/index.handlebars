@@ -2,13 +2,16 @@
 
 <head>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/normalize.css">
 
 </head>
 
 <body>
     <div class='header'>
         <h1>Greet Web Form</h1>
-        <a href='/greeted'>namesGreeted</a>
+        <a href='/greeted'>Names Greeted</a>
+        <!-- <a href="/greeted" display="block">Return to main greeting page</a><br><br><br> -->
+
     </div>
     <hr>
 
@@ -23,7 +26,10 @@
                 <input type="text" name="greeting" placeholder="type ur name here">
             </div>
             <br>
-            <div class='radio'>
+            <div class='form-radio' id='language'>
+
+                <p>Counter: <a>0</a></p>
+
                 <span>
   <input type="radio" name="language" value="english"/>
   <label>English</label>
@@ -34,8 +40,8 @@
   <input type="radio" name="language" value="columbia"/>
   <label>Columbia</label>
 </span>
-<br>
-<br>
+                <br>
+                <br>
 
             </div>
             <input type='submit' name='greetBtn' value='Greet Me!'>

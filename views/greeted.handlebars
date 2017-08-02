@@ -1,32 +1,26 @@
-<!doctype>
+<!doctype html>
 <html>
 
 <head>
-    <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <div class="header">
     <h1>Names Greeted:</h1>
     <div class="viewLinks">
     <a display='block' href='/greetings'>home</a>
+
 </div>
 </div>
 
 <div class="divOne">
     <ul style='List-style: none;'>
         {{#each greetings}}
-        <!-- <li>Hello, {{this}}</li> -->
-            <li><a href='counter/{{this}}' display='block'>{{this}}</a></li>
+            <li><a href='greeted/counter/{{this}}' display='block'>{{name}}{{this}}</a></li>
             {{else}}
-                <li>Oops!names not greeted!</li>
         {{/each}}
     </ul>
 
-</div>
-<div class='greetings'>
-    <ul>
-        {{#each greetings}}
-        <li>Hello, {{this}}</li>
-        {{/each}}
-    </ul>
-</div>
+
 </body>
