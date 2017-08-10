@@ -3,23 +3,24 @@
 
 <head>
   <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 
 </head>
 <div class="header">
-    <h1>Names Greeted:</h1>
-    <div class="viewLinks">
-    <a display='block' href='/greetings'>home</a>
+  <h1>Names Greeted:</h1>
+  <div class="viewLinks">
+    <!-- <a display='block' href='/greetings'>home</a> -->
+    <a href="/greetings" display="block">Return to main greeting page</a><br><br><br> |
+    <a href='/counter'>Go To Tally</a>
 
-</div>
+  </div>
 </div>
 
 <div class="divOne">
-    <ul style='List-style: none;'>
-        {{#each greetings}}
-            <li><a href='greeted/counter/{{this}}' display='block'>{{name}}{{this}}</a></li>
-            {{else}}
-        {{/each}}
+  <ul style='List-style: none;'>
+    {{#each greetedNames}}
+    <a href="/counter ' + name + '">' + {{this}} + '</a><br />);
+    {{/each}}
     </ul>
 
 

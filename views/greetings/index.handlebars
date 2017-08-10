@@ -1,59 +1,59 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/normalize.css">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="public/normalize.css">
+  <link rel="stylesheet" href="/style.css">
 
 </head>
 
 <body>
-    <div class='header'>
-        <h1>Greet Web Form</h1>
-        <a href='/greeted'>Names Greeted</a>
-        <!-- <a href="/greeted" display="block">Return to main greeting page</a><br><br><br> -->
+  <div class='header'>
+    <h1>Greet Web Form</h1>
+    <a href='/greeted'>Names Greeted</a>
+  </div>
+  <hr>
 
-    </div>
-    <hr>
+  <div class='input2'>
+    {{#if messages.error}}
+      <div class='flashErr'>
+        <h2>{{messages.error}}</h2>
+      </div>
+    {{/if}}
+    <form class='' action='/greetings' method='POST'>
+      <div class='field2'>
+        <input type="text" name="greeting" placeholder="type ur name here">
+      </div>
+      <br>
 
-    <div class='input2'>
-        {{#if messages.error}}
-            <div class='flashErr'>
-                <h2>{{messages.error}}</h2>
-            </div>
-        {{/if}}
-        <form class='' action='/greetings' method='post'>
-            <div class='field2'>
-                <input type="text" name="greeting" placeholder="type ur name here">
-            </div>
-            <br>
-            <div class='form-radio' id='language'>
+      <p>Counter: <a>0</a></p>
 
-                <p>Counter: <a>0</a></p>
 
-                <span>
-  <input type="radio" name="language" value="english"/>
-  <label>English</label>
-  <br>
-  <input type="radio" name="language" value="afrikaans"/>
-  <label>Afrikaans</label>
-  <br>
-  <input type="radio" name="language" value="columbia"/>
-  <label>Columbia</label>
-</span>
-                <br>
-                <br>
+      <div class='form-radio'>
+        <span>
+          <input type="radio" name="language" value="english"/>
+          <label>English</label>
+          <br>
+          <input type="radio" name="language" value="afrikaans"/>
+          <label>Afrikaans</label>
+          <br>
+          <input type="radio" name="language" value="colombia"/>
+          <label>Colombia</label>
+        </span>
+        <br>
+        <br>
 
-            </div>
-            <input type='submit' name='greetBtn' value='Greet Me!'>
-        </form>
-    </div>
-    <hr>
-    <br>
-    <div class='greetings'>
-        <ul>
-            {{#each greetings}}
-                <li>Hello, {{this}}</li>
-            {{/each}}
-        </ul>
-    </div>
+      </div>
+      <input type='submit' name='greetBtn' value='Greet Me!'>
+    </form>
+  </div>
+  <hr>
+  <ul>
+    {{lang}} {{name}} {{message}}
+    {{#each greetings}}
+      <!-- '<a href="/greetings' + name + '">' greetList ' </a><br />'); -->
+      <li>Hello, {{this}}</li>
+    {{/each}}
+  </ul>
+  </div>
 </body>
