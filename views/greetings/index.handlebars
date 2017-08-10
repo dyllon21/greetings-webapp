@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="public/normalize.css">
+  <link rel="stylesheet" href="/normalize.css">
   <link rel="stylesheet" href="/style.css">
 
 </head>
@@ -26,7 +26,7 @@
       </div>
       <br>
 
-      <p>Counter: <a>0</a></p>
+      <p>Counter: <a>{{counter}}</a></p>
 
 
       <div class='form-radio'>
@@ -51,7 +51,6 @@
   <ul>
     {{lang}} {{name}} {{message}}
     {{#each greetings}}
-      <!-- '<a href="/greetings' + name + '">' greetList ' </a><br />'); -->
       <li>Hello, {{this}}</li>
     {{/each}}
   </ul>

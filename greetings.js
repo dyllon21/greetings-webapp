@@ -2,36 +2,33 @@
 module.exports = function() {
 
   const greetList = [];
+  //
+  //  const greetings = function(req, res) {
+  //    res.render('greetings/index', {
+  //      greetings: greetList
+  // });
+  // }
+  //  const greeted = function(req, res) {
 
-  const greetings = function(req, res) {
-    var counter = req.body.counter;
-    if (counter >= 0){
-      ++counter;
-    }else{
-      counter = 0;
-    }
-    res.render('greetings/index', {count: counter});
-      greetings: greetList
- };
-  const greeted = function(req, res) {
-    res.render('greetings/index', {
-      greeted: greetList
-    });
-  };
-
-  const index = function(req, res) {
-    res.render('greetings', {
-      greetings: greetList
-    });
-  };
+  //    res.render('greeted', {
+  //      greeted: greetList
+  //    });
+  //  };
+  //
+  //  const index = function(req, res) {
+  //    res.render('greetings', {
+  //      greetings: greetList
+  //    });
+  //  };
   const add = function(req, res) {
 
     var greeting = req.body.greeting;
-      var foundGreeting = greetList.find(function(currentGreeting) {
-      return currentGreeting === greeting;    });
+    var foundGreeting = greetList.find(function(currentGreeting) {
+      return currentGreeting === greeting;
+    });
 
     // flash messages
-    console.log(foundGreeting);
+
     if (greeting === '') {
       req.flash('error', 'please confirm your name!')
     } else {
@@ -45,36 +42,35 @@ module.exports = function() {
     const language = req.body.language;
     const firstName = req.body.greeting;
 
-    console.log('language: ' + language);
-    if (language === 'colombia') {
-      res.render('greetings/index', {
-        lang: 'Buenos Dias, ',
-        name: firstName
-      });
-    } else if (language === 'english') {
-      res.render('greetings/index', {
-        lang: 'Hello, ',
-        name:  firstName
-      });
-    } else if (language === 'afrikaans') {
-      res.render('greetings/index', {
-        lang: 'Hallo, ',
-        name:  firstName
-      });
+    if (language !== undefined || language) {
+
+      if (language === 'colombia') {
+        var lang = 'Buenos Dias, '
+        var name = firstName;
+
+      } else if (language === 'english') {
+        var lang = 'Hello, ';
+          var name = firstName;
+      } else if (language === 'afrikaans') {
+        var lang = 'Hallo, ';
+          var name = firstName;
+      }
+
+      var data = {
+        lang: lang,
+        name: name,
+        counter: greetList.length
+      }
+
+      res.render('greetings/index', data)
+
     } else {
       res.render('greetings/index', {
         message: 'Please select a language!'
       });
     }
-    // app.get('/greetings/:name', function(req, res) {
-    //     if (greetedNames[req.params.name]) {
-    //         greetedNames[req.params.name]++;
-    //     } else {
-    //         greetedNames[req.params.name] = 1;
-    //     }
-    //     res.send('<h1>hello, ' + req.params.name);
-    // });
-    //routes here:
+
+
     // app.use((req, res, next) => {
     //   req.message = 'this message made it';
     //   // console.log('one');
@@ -157,10 +153,10 @@ module.exports = function() {
   }
 
   return {
-    index,
-    add,
-    greeted,
-    greetings
+    // index,
+    add
+    // greeted,
+    // greeti/ngs
     // counter
-  }
-}
+  };
+};

@@ -1,6 +1,6 @@
 body {
   background-color: #808080;
-  align: center;
+  align: 0 auto;
 }
 
 div.header {
@@ -37,9 +37,10 @@ h2 {
 
 div.input2 {
   background-color: #000000;
-  /*border-radius: 1em;*/
+  align-items: center;
   border-style: solid;
   height: 20em;
+  padding-left: 0em;
 }
 
 div.radio {
@@ -49,6 +50,7 @@ div.radio {
 }
 
 label {
+  padding-left: 4em;
   color: lightgreen;
   display: inline-block;
 }
@@ -58,6 +60,7 @@ div.input {
   border-radius: 1em;
   border-style: solid;
   height: 15em;
+  align-content: center;
 }
 
 div.field2, input {
@@ -92,13 +95,13 @@ ul, li {
 
 form {
   width: 10em;
-  padding-left: 40em;
-  text-align: center;
+  padding-left: 30em;
+  align-content: center;
   /*float: center;*/
 }
 
 input {
-  padding: 0.5em;
+  padding: 0.3em;
   border-radius: 5em;
   width: 12em;
   border-style: solid;
@@ -109,4 +112,5 @@ p {
   color: white;
   font-family: sans-serif;
   font-size: 1em;
+  padding-left: 4em;
 }

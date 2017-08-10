@@ -7,9 +7,6 @@ const bodyParser = require('body-parser');
 const flash = require('express-flash');
 const session = require('express-session');
 const path = require('path');
-
-var GreetingRoutes = require('./greetings');
-var greetingRoutes = GreetingRoutes();
 //configuration:
 app.use(flash());
 app.use(express.static(path.join(__dirname, './static')));
@@ -19,8 +16,8 @@ app.set('view engine', 'handlebars');
 
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
-  extended: true
-}))
+  extended: false
+}));
 
 //parse application json
 app.use(bodyParser.json())
@@ -35,31 +32,62 @@ app.engine('handlebars', exphbs({
   defaultLayout: 'main'
 }));
 
-const greetedNames = [];
+// var GreetingRoutes = require('./counter');
+var GreetingRoutes = require('./greetings');
+var greetingRoutes = GreetingRoutes();
 
+//
+// app.get('/greetings/:name', function(req, res) {
+//
+//     if (greetedNames[req.params.name]) {
+//         greetedNames[req.params.name]++;
+//     } else {
+//        greetedNames.push(req.params.name)
+//         greetedNames[req.params.name] = 1;
+//     }
+//     console.log('greetedNames',greetedNames);
+//     res.send('<h1>hello, ' + req.params.name);
+// });
+//
+
+app.get('/greetings/:id', function(req, res) {
+  console.log(req.params.id);
+  res.send("hello, " + req.params.id);
+});
+
+const greetedNames = [];
 app.get('/greeted', function(req, res) {
-  const namesGreeted = [];
+  // const namesGreeted = [];
   for (let name in greetedNames) {
-    namesGreeted.push('<a href="/counter' + name + '">' + name + '</a><br />');
+    // namesGreeted.push('<a href="/counter' + name + '">' + name + '</a><br />');
   }
   res.render('greeted', {
     namesGreeted: greetedNames
 
   });
 });
-app.get('/counter/:name', function(req, res) {
+// });
+// app.get('/counter/:name', function(req, res) {
+//
+//   res.redirect('/greetings');
+// });
+//
+
+// app.post('/counter', greetingRoutes.index);
+
+app.get('/', function(req, res) {
   res.redirect('/greetings');
 });
 
-// app.post('/greeted', greetingRoutes.greeted);
-app.get('/greetings', greetingRoutes.index);
+app.get('/greetings', greetingRoutes.add);
 app.post('/greetings', greetingRoutes.add);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, function() {
   console.log('web app started on port : ' + port);
 });
+//
 // app.get('/api/users/:name', function(req, res) {
 //     var user_id = req.param('id');
 //     var token = req.param('token');
