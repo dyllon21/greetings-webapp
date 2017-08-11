@@ -10,8 +10,7 @@ module.exports = function() {
   // }
   //  const greeted = function(req, res) {
 
-  //    res.render('greeted', {
-  //      greeted: greetList
+  //    res.render('greeted', {  //      greeted: greetList
   //    });
   //  };
   //
