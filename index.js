@@ -1,73 +1,28 @@
 'use strict';
-//requirements:
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
-
-// var greetName = mongoose.model('greetName', { name: string });
-//
-// var name = new greetName ({ name: 'Dyllon' });
-// name.save(function (err) {
-//   if(err) {
-//     console.log(err);
-//   }else {
-//     console.log('meow');
-//   }
-// });
-//
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error'));
-// db.once('open', function() {
-//   //we're connected!
-// });
-//
-// var greetListSchema = mongoose.Schema({
-//   name: string
-// });
-//
-// var greetName = mongoose.model('greetName', greetListSchema);
-//
-// var newPerson =  new greetName({ name: 'newGreet' });
-// console.log(newGreet.name); //'newGreet'
-//
-// // NOTE : methods must be added tot he schema before compiling it with mongoose.model()
-// greetListSchema.methods.speak = function () {
-//   var greeting = this.name
-//   ? "hello " + this.name
-//   : "I don't have a name";
-//   console.log(greeting);
-// }
-// var greetedNames = mongoose.model('greetedNames', greetListSchema);
-//
-// var newName = new greet({ name: 'newName' });
-// newName.speak();//hello name is newName
-//
-//
-// newName.save(function (err, newName) {
-//   if (err) return console.error(err);
-//   newName.speak();
-// });
-//
-// greetList.find(function (err, greetedNames) {
-//   if (err) return console.error(err);
-//   console.log(greetedNames);
-// });
-//
-//  greetList.find({ name: /^newName/ }, callback);
-
-
+//configuration:
 const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const flash = require('express-flash');
 const session = require('express-session');
-const path = require('path');
-//configuration:
+// const path = require('path');
+
+const GreetingRoutes = require('./greetings');
+const Models = require('./models');
+
+const models = Models('mongodb://localhost/names');
+const greetingRoutes = GreetingRoutes(models);
+
+
 app.use(flash());
-app.use(express.static(path.join(__dirname, './static')));
+// app.use(express.static(path.join(__dirname, './static')));
 app.use(express.static('public'));
 app.use(express.static('views'));
 app.set('view engine', 'handlebars');
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/names');
 
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -88,8 +43,6 @@ app.engine('handlebars', exphbs({
 }));
 
 // var GreetingRoutes = require('./counter');
-var GreetingRoutes = require('./greetings');
-var greetingRoutes = GreetingRoutes();
 
 //
 // app.get('/greetings/:name', function(req, res) {
@@ -105,10 +58,10 @@ var greetingRoutes = GreetingRoutes();
 // });
 //
 
-app.get('/greetings/:id', function(req, res) {
-  console.log(req.params.id);
-  res.send("hello, " + req.params.id);
-});
+// app.get('/greetings/:id', function(req, res) {
+//   console.log(req.params.id);
+//   res.send("hello, " + req.params.id);
+// });
 
 const greetedNames = [];
 app.get('/greeted', function(req, res) {
@@ -116,25 +69,19 @@ app.get('/greeted', function(req, res) {
   for (let name in greetedNames) {
     // namesGreeted.push('<a href="/counter' + name + '">' + name + '</a><br />');
   }
-  res.render('greeted', {
+  res.render('greetings/index', {
     namesGreeted: greetedNames
 
   });
-});
-// });
-// app.get('/counter/:name', function(req, res) {
-//
-//   res.redirect('/greetings');
-// });
-//
+ });
 
-// app.post('/counter', greetingRoutes.index);
 
 app.get('/', function(req, res) {
   res.redirect('/greetings');
 });
-
+// app.post('/greeted', greetingRoutes.add)
 app.get('/greetings', greetingRoutes.add);
+// app.get('/greetings/greeted', greetingRoutes.greetedScreen);
 app.post('/greetings', greetingRoutes.add);
 
 const port = process.env.PORT || 3000;

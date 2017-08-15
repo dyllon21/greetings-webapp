@@ -17,9 +17,10 @@
 </div>
 
 <div class="divOne">
-  <ul style='List-style: none;'>
+  <ul>
     {{#each greetings}}
-    <a href="/counter ' + name + '">' + {{this}} + '</a><br />);
+    {{name}}
+    <a href="/counter ' + name + '">' + {{name}} + '</a><br />);
     {{/each}}
     </ul>
 
