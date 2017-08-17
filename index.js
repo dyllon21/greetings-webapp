@@ -2,34 +2,43 @@
 //configuration:
 const express = require('express');
 const app = express();
+
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const flash = require('express-flash');
 const session = require('express-session');
 // const path = require('path');
 
-const GreetingRoutes = require('./greetings');
-const Models = require('./models');
+ const GreetingRoutes = require('./greetings');
+ const Models = require('./models');
 
-const models = Models('mongodb://localhost/names');
-const greetingRoutes = GreetingRoutes(models);
+ const models = Models('mongodb://localhost/greetings');
+
+ const greetingRoutes = GreetingRoutes(models);
+
 
 
 app.use(flash());
-// app.use(express.static(path.join(__dirname, './static')));
+// // app.use(express.static(path.join(__dirname, './static')));
 app.use(express.static('public'));
 app.use(express.static('views'));
-app.set('view engine', 'handlebars');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/names');
+mongoose.connect('mongodb://localhost/greetings');
+
+var Schema = mongoose.Schema;
+
+var nameSchema = Schema({
+  name: String,
+  amount: Number
+});
 
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-//parse application json
+// parse application json
 app.use(bodyParser.json())
 
 app.use(session({
@@ -41,8 +50,7 @@ app.use(session({
 app.engine('handlebars', exphbs({
   defaultLayout: 'main'
 }));
-
-// var GreetingRoutes = require('./counter');
+app.set('view engine', 'handlebars');
 
 //
 // app.get('/greetings/:name', function(req, res) {
@@ -56,33 +64,14 @@ app.engine('handlebars', exphbs({
 //     console.log('greetedNames',greetedNames);
 //     res.send('<h1>hello, ' + req.params.name);
 // });
-//
-
-// app.get('/greetings/:id', function(req, res) {
-//   console.log(req.params.id);
-//   res.send("hello, " + req.params.id);
-// });
-
-const greetedNames = [];
-app.get('/greeted', function(req, res) {
-  // const namesGreeted = [];
-  for (let name in greetedNames) {
-    // namesGreeted.push('<a href="/counter' + name + '">' + name + '</a><br />');
-  }
-  res.render('greetings/index', {
-    namesGreeted: greetedNames
-
-  });
- });
-
-
 app.get('/', function(req, res) {
-  res.redirect('/greetings');
+  res.send('/greetings/add');
 });
-// app.post('/greeted', greetingRoutes.add)
-app.get('/greetings', greetingRoutes.add);
-// app.get('/greetings/greeted', greetingRoutes.greetedScreen);
-app.post('/greetings', greetingRoutes.add);
+
+
+ app.get('/greetings', greetingRoutes.index);
+ app.get('/greetings/add', greetingRoutes.addScreen);
+ app.post('/greetings/add', greetingRoutes.add);
 
 const port = process.env.PORT || 3000;
 

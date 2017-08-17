@@ -1,0 +1,70 @@
+<!doctype html>
+ <html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/normalize.css">
+  <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+  <div class='header'>
+    <h1>Greet Web Form</h1>
+    <a href='/greetings'>People Greeted So Far</a>
+  </div>
+  <hr>
+    {{#if messages.error}}
+      <div class='error'>
+        <h2>{{messages.error}}</h2>
+        <br>
+      </div>
+      {{/if}}
+
+      {{#if messages.success}}
+      <div class='success'>
+        <h2>{{messages.success}}</h2>
+      </div>
+      {{/if}}
+
+
+    <form class='' action='/greetings/add' method='POST'>
+      <div class='field2'>
+        <input type="text" name="greeting" placeholder="type ur name here">
+      </div>
+
+      <p>Counter: <a>{{counter}}</a></p>
+
+
+      <div class='form-radio'>
+        <span>
+          <input type="radio" name="language" value="english"/>
+          <label>English</label>
+          <br>
+          <input type="radio" name="language" value="afrikaans"/>
+          <label>Afrikaans</label>
+          <br>
+          <input type="radio" name="language" value="colombia"/>
+          <label>Colombia</label>
+        </span>
+        <br>
+        <br>
+
+      </div>
+      <div class=''>
+      <input type='submit' name='greetBtn' value='Greet Me!'>
+    </form>
+  </div>
+  <hr>
+  <ul>
+    {{lang}} {{name}} {{message}}
+    {{#each greetings}}
+    <li>{{this}}</li>
+    {{/each}}
+  </ul>
+</body>
+<!-- <h1>Add A Greeting</h1>
+<form class='' action='/greetings/add' method='post'>
+  <input type='text' name='greeting' placeholder="type your name here">
+  <input type="submit" name="" value="Greet">
+</form> -->

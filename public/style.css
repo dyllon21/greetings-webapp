@@ -47,12 +47,16 @@ div.radio {
   /*color : #ffffff;*/
   font-family: sans-serif;
   align-items: 0 auto;
+  clear: none;
+  width: auto;
 }
 
 label {
   padding-left: 4em;
   color: lightgreen;
   display: inline-block;
+  clear: none;
+  width: auto;
 }
 
 div.input {
@@ -113,4 +117,14 @@ p {
   font-family: sans-serif;
   font-size: 1em;
   padding-left: 4em;
+}
+
+form label[for="English"],
+form label[for="English"] + input,
+form label[for="Afrikaans"],
+form label[for="Afrikaans"] + input
+form label[for="Colombia"]
+form label[for="Colombia"] + input {
+  clear: none;
+  width: auto;
 }
