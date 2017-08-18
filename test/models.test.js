@@ -43,9 +43,10 @@ describe('models should be able to', function(done) {
       var greetingData = {
         name: 'The names-tests'
       };
+
       models.Greeting.create(greetingData, function(err) {
         assert.ok(err, 'Should give error for duplicate names');
-        done();
+        done(err);
 
       });
 

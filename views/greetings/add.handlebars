@@ -14,12 +14,12 @@
     <a href='/greetings'>People Greeted So Far</a>
   </div>
   <hr>
-    {{#if messages.error}}
+    <!-- {{#if messages.error}}
       <div class='error'>
         <h2>{{messages.error}}</h2>
         <br>
       </div>
-      {{/if}}
+      {{/if}} -->
 
       {{#if messages.success}}
       <div class='success'>
@@ -56,12 +56,14 @@
     </form>
   </div>
   <hr>
+  <div class='footer'>
   <ul>
     {{lang}} {{name}} {{message}}
     {{#each greetings}}
-    <li>{{this}}</li>
+    <li>{{name}}</li>
     {{/each}}
   </ul>
+  </div
 </body>
 <!-- <h1>Add A Greeting</h1>
 <form class='' action='/greetings/add' method='post'>

@@ -17,14 +17,15 @@ const session = require('express-session');
  const greetingRoutes = GreetingRoutes(models);
 
 
-
 app.use(flash());
 // // app.use(express.static(path.join(__dirname, './static')));
 app.use(express.static('public'));
 app.use(express.static('views'));
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/greetings');
+mongoose.connect('mongodb://localhost/greetings'),{
+  useMongoClient: true,
+};
 
 var Schema = mongoose.Schema;
 

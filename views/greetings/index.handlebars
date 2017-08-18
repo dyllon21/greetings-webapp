@@ -7,33 +7,22 @@
 </head>
 
 <body>
-<!--
-  {{#if messages.error}}
-    <div class='error'>
-      <h2>{{messages.error}}</h2>
-      <br>
-    </div>
-    {{/if}}
-
-    {{#if messages.success}}
-    <div class='success'>
-      <h2>{{messages.success}}</h2>
-    </div>
-    {{/if}} -->
 
   <div class="header">
     <h1>Greetings</h1>
-    <a href="/greetings/add">Greet More People</a>
     <div class="viewLinks">
+      <a href="/greetings/add">Greet More People</a>
     </div>
   </div>
-
+  <hr>
+  <div class='footer'>
     <ul>
       {{#each greetings}}
         <li>{{name}}</li>
         <!-- <a href="/counter ' + name + '">' + {{name}} + '</a><br />); -->
       {{/each}}
     </ul>
+  </div>
 </body>
 
 </html>
