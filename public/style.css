@@ -1,7 +1,8 @@
-body {
+/*body {
   background-color: #808080;
   align: 0 auto;
-}
+}*/
+
 div.output{
   font-family: sans-serif;;
   font-size: 25px;
@@ -53,10 +54,10 @@ h2 {
   color: red;
 }
 div.container {
-  align-content: center;
+  align: center;
   clear: none;
   display: inline;
-  padding-center: 5em;
+  padding-left: 5em;
   float: center;
 
 }
@@ -87,7 +88,7 @@ div.field {
 }
 
 ul, li {
-  color: darkgreen;
+  color: #fff;
   font-family: sans-serif;
   margin: 0em auto;
   text-align: center;
@@ -120,6 +121,12 @@ ul, li {
 }
 
 .theBtn {
-  border-radius: 25px;
+  border-radius: 20em;
   color: #000;
+  font-family: sans-serif;
+
+}
+
+.radios {
+font-family: sans-serif;
 }

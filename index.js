@@ -154,7 +154,10 @@ app.post('/', function(req, res, next) {
   } else if (resetButton) {
     namesGreeted.remove({}, function(err) {
       if (err) {
-        return console.log(err);
+        if (err) {
+          return next(err);
+        }
+        // return console.log(err);
       }
     })
   };
@@ -180,13 +183,13 @@ app.get('/greeted', function(req, res, next) {
 
 app.get('/counter/:name', function(req, res, next) {
   namesGreeted.findOne({
-    name: req.body.name
-  }, function(err, UrlName) {
+    name: req.params.name
+  }, function(err, greeting) {
     if (err) {
       return next(err);
     } else {
-      if (UrlName) {
-        var resultOfSearchedName = 'Hello, ' + req.body.greeting + ". You have been greeted " + req.body.amount + ' time(s).'
+      if (greeting) {
+        var resultOfSearchedName = 'Hi, ' + greeting.name + ". You have been greeted " + greeting.amount + ' time(s).'
       } else {
         var resultOfSearchedName = "Oops!, we don't know this person!"
       }
