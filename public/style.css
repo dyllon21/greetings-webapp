@@ -2,7 +2,16 @@ body {
   background-color: #808080;
   align: 0 auto;
 }
-
+div.output{
+  font-family: sans-serif;;
+  font-size: 25px;
+  height: 100px;
+  width: 0 auto;
+  margin: auto;
+  text-align: center;
+  background-color: #000;
+  padding-top: 10px;
+}
 div.header {
   /*align-content: center;*/
   /*float: center;*/
@@ -24,16 +33,16 @@ div.footer{
   border-spacing: 12em;
 }
 
-.a {
-  float: right;
+a {
+  align-self: auto;
+  color: blue;
   padding-center: 4em;
-
 }
-/*
+
 h1 {
   color: silver;
-  text-align: center;*/
-
+  text-align: center;
+}
 
 h2 {
   color: red;
@@ -43,42 +52,20 @@ h2 {
 .error {
   color: red;
 }
-
-div.input2 {
-  background-color: #000000;
-  align-items: center;
-  border-style: solid;
-  height: 20em;
-  padding-left: 0em;
-}
-
-.input, .radios, .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 400px;
-    margin: 20px;
-    height: 50px;
-    transition: 50ms ease-in;
-}
-label {
-  padding-left: 4em;
-  color: lightgreen;
-  display: inline-block;
+div.container {
+  align-content: center;
   clear: none;
-  width: auto;
-}
+  display: inline;
+  padding-center: 5em;
+  float: center;
 
+}
 div.input {
   background-color: white;
   border-radius: 1em;
   border-style: solid;
   height: 15em;
   align-content: center;
-}
-
-div.field2, input {
-  border-radius: 10px;
 }
 
 div.viewLinks {
@@ -110,14 +97,14 @@ ul, li {
   /*text-decoration-color: white;*/
 }
 
-form {
+.form {
   width: 10em;
-  padding-left: 30em;
-  text-align: center;
-  /*float: center;*/
+  padding-left: 50em;
+  align-content: center;
+  float: right;
 }
 
-input {
+.input {
   padding: 0.3em;
   border-radius: 5em;
   width: 12em;
@@ -125,19 +112,14 @@ input {
   color: blue;
 }
 
-p {
+.p {
   color: white;
   font-family: sans-serif;
   font-size: 1em;
   padding-left: 4em;
 }
 
-form label[for="English"],
-form label[for="English"] + input,
-form label[for="Afrikaans"],
-form label[for="Afrikaans"] + input
-form label[for="Colombia"]
-form label[for="Colombia"] + input {
-  clear: none;
-  width: auto;
+.theBtn {
+  border-radius: 25px;
+  color: #000;
 }

@@ -18,6 +18,9 @@ html {
 
 body {
   margin: 0 auto;
+  clear: none;
+  padding: 2em;
+  float:center;
 }
 
 /* HTML5 display definitions
@@ -259,17 +262,19 @@ input,
 optgroup,
 select,
 textarea {
-  color: inherit; /* 1 */
-  font: inherit; /* 2 */
+  color: #FFF000; /* 1 */
+  font: monospace; /* 2 */
   margin: 0 auto; /* 3 */
+  border-radius: 5em;
+
 }
 
 /**
  * Address `overflow` set to `hidden` in IE 8/9/10/11.
  */
 
-button {
-  overflow: visible;
+button:hover {
+  overflow:visible;
 }
 
 /**
@@ -281,7 +286,8 @@ button {
 
 button,
 select {
-  text-transform: none;
+  text-transform:capitalize;
+  border-radius: 35em;
 }
 
 /**
@@ -340,6 +346,7 @@ input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box; /* 1 */
   padding: 0; /* 2 */
+  color: #fff000;
 }
 
 /**
@@ -403,6 +410,7 @@ legend {
 
 textarea {
   overflow: auto;
+  border-radius: 25em;
 }
 
 /**

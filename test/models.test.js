@@ -3,49 +3,34 @@ const Models = require('../models');
 
 describe('models should be able to', function(done) {
 
-  var models = Models('mongodb://localhost/the names-tests');
+  var models = Models('mongodb://localhost/greetings-test');
   //
   beforeEach(function(done) {
     models.Greeting.remove({}, function(err) {
       done(err);
     })
-
-  })
-
+})
   it('store names to MongoDB', function(done) {
 
-    // var models = Models('mongodb://localhost/names');
-    var greetingData = {
-      name: 'The names-tests'
-    };
+    var greetingData = {name : 'the greet test'};
+    models.Greeting.create(greetingData, function(err){
 
-    models.Greeting.create(
-      greetingData,
-      function(err) {
+      models.Greeting.find({ name : 'the greet test'}, function(err, greetings){
+        assert.equal(1, greetings.length);
         done(err);
+      })
+    });
 
-        models.Greeting.find({
-          name: 'The names-tests'
-        }, function(err, greeting) {
-          assert.equal(1, greeting.length);
-          done(err);
-        });
-
-      });
 
   });
 
   it('should not allow duplicate Greetings', function(done) {
-    var greetingData = {
-      name: 'The names-tests'
-    };
+    var greetingData = {name: 'the greet test'};
     models.Greeting.create(greetingData, function(err) {
-      var greetingData = {
-        name: 'The names-tests'
-      };
+      var greetingData = {name: 'the greet test'};
 
       models.Greeting.create(greetingData, function(err) {
-        assert.ok(err, 'Should give error for duplicate names');
+        assert.ok(err, 'Should give error for duplicated names');
         done(err);
 
       });

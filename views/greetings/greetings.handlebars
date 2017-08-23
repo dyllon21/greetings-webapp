@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/normalize.css">
+  <link rel="stylesheet" href="/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class='header'>
+    <h1>Greet Web Form</h1>
+    <a href='/greeted'>People Greeted So Far</a>
+  </div>
+  <br>
+  {{#if messages.error}}
+    <div class='error'>
+      <h2>{{messages.error}}</h2>
+    </div>
+  {{/if}}
+
+  {{#if messages.success}}
+    <div class='success'>
+      <h2>{{messages.success}}</h2>
+    </div>
+  {{/if}}
+
+
+  <form class='' action='/' method='POST'>
+    <div class='field2'>
+      <input align='center' type="text" name="greeting" placeholder="type ur name here">
+    </div>
+    <br>
+    <div class='counter'>
+      <h2>counter : {{amount}}</h2>
+    </div>
+    <div class='container'>
+      <label class='radios'>
+          <input type="radio" name="language" value='english'>English</label> |
+      <label class='radios'>
+          <input type="radio" name="language" value='afrikaans'>Afrikaans</label> |
+      <label class='radios'>
+          <input type="radio" name="language" value='colombia'>Colombia</label>
+      <br>
+    </div>
+    <div class='theBtn'>
+      <input type='submit' name='greetBtn' value='Greet Me!'> |
+      <input name='resetButton' type='submit' value='reset greet history' class='button'>
+    </div>
+    <hr>
+    <div class='output'>
+      <ul>
+        <p>{{greeting}}</p>
+  </form>
+  </ul>
+  </div>
+</body>
+<!-- <h1>Add A Greeting</h1>
+<form class='' action='/greetings/add' method='post'>
+  <input type='text' name='greeting' placeholder="type your name here">
+  <input type="submit" name="" value="Greet">
+</form> -->

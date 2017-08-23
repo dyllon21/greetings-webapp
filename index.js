@@ -2,37 +2,17 @@
 //configuration:
 const express = require('express');
 const app = express();
-
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const flash = require('express-flash');
 const session = require('express-session');
-// const path = require('path');
+const Models = require('./models');
 
- const GreetingRoutes = require('./greetings');
- const Models = require('./models');
-
- const models = Models('mongodb://localhost/greetings');
-
- const greetingRoutes = GreetingRoutes(models);
-
+const models = Models('mongodb://localhost/greetings');
 
 app.use(flash());
-// // app.use(express.static(path.join(__dirname, './static')));
 app.use(express.static('public'));
 app.use(express.static('views'));
-
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/greetings'),{
-  useMongoClient: true,
-};
-
-var Schema = mongoose.Schema;
-
-var nameSchema = Schema({
-  name: String,
-  amount: Number
-});
 
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -53,8 +33,28 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-//
-// app.get('/greetings/:name', function(req, res) {
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var mongoDB = 'mongodb://localhost/greetings-webapp';
+mongoose.connect(mongoDB);
+
+var MongoClient = require('mongodb').MongoClient,
+  format = require('util').format;
+
+var nameSchema = Schema({
+  name: String,
+  amount: Number
+});
+
+var sessionNames = [];
+var counter;
+var language;
+
+const namesGreeted = mongoose.model('namesGreeted', nameSchema);
+
+// const greetedNames = [];
+// app.get('/greetings/add/:name', function(req, res) {
 //
 //     if (greetedNames[req.params.name]) {
 //         greetedNames[req.params.name]++;
@@ -65,55 +65,143 @@ app.set('view engine', 'handlebars');
 //     console.log('greetedNames',greetedNames);
 //     res.send('<h1>hello, ' + req.params.name);
 // });
-app.get('/', function(req, res) {
-  res.send('/greetings/add');
+app.get('/', function(req, res, next) {
+
+  namesGreeted.distinct('name', function(err, results) {
+    if (sessionNames[0] !== undefined) {
+      var lastName = sessionNames.length - 1;
+      var namesForGreeting = sessionNames[lastName].name;
+    };
+    counter = results.length
+    res.render('greetings/greetings', {
+      amount: counter
+    })
+  })
+})
+
+app.post('/', function(req, res, next) {
+  sessionNames.push({
+    'name': req.body.greeting
+  });
+  var resetButton = req.body.resetButton;
+  var greetBtn = req.body.greetBtn;
+  var message = '';
+
+  if (req.body.language === 'colombia') {
+    message = 'Buenos Dias, '
+  } else if (req.body.language === 'english') {
+    message = 'Hello, '
+  } else if (req.body.language === 'afrikaans') {
+    message = 'Hallo, ';
+  } else if (req.body.language === undefined) {
+    message = 'please select a Language!'
+  }
+
+  var greeting = {
+    name: req.body.greeting
+  };
+  if (!greeting || !greeting.name) {
+    req.flash('error', 'Name Field Should Not Be Blank!')
+  } else {
+    models.Greeting.create(greeting, function(err, results) {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('error', 'Name Already Exists!')
+        } else {
+          return next(err);
+          res.redirect('/');
+        }
+      } else {
+        req.flash('success', 'Name Successfully Added!');
+      }
+    });
+  }
+
+  if (greetBtn) {
+    namesGreeted.findOne({
+      name: req.body.greeting
+    }, function(err, searchName) {
+      if (err) {
+        return next(err)
+      } else {
+        if (!searchName && (req.body.greeting !== "")) {
+          var newName = new namesGreeted({
+            name: req.body.greeting,
+            amount: 1
+          });
+          newName.save(function(err, results) {
+            if (err) {
+              return next(err);
+            }
+            console.log('results', results);
+          })
+        } else {
+
+          namesGreeted.update({
+            name: req.body.greeting
+          }, {
+            $inc: {
+              amount: 1
+            }
+          }, function(err) {
+            if (err) {
+              console.log('update not functioning');
+            }
+          });
+        }
+      }
+    })
+  } else if (resetButton) {
+    namesGreeted.remove({}, function(err) {
+      if (err) {
+        return console.log(err);
+      }
+    })
+  };
+  var message = message + req.body.greeting;
+  res.render('greetings/greetings', {
+    greeting: message
+  });
 });
 
+app.get('/greeted', function(req, res, next) {
+  var xx;
+  namesGreeted.distinct('name', function(err, results) {
+    if (err) {
+      return next(err);
+    } else {
+      res.render('greetings/greeted', {
+        namesGreeted: results
+      });
 
- app.get('/greetings', greetingRoutes.index);
- app.get('/greetings/add', greetingRoutes.addScreen);
- app.post('/greetings/add', greetingRoutes.add);
+    }
+  });
+});
 
+app.get('/counter/:name', function(req, res, next) {
+  namesGreeted.findOne({
+    name: req.body.name
+  }, function(err, UrlName) {
+    if (err) {
+      return next(err);
+    } else {
+      if (UrlName) {
+        var resultOfSearchedName = 'Hello, ' + req.body.greeting + ". You have been greeted " + req.body.amount + ' time(s).'
+      } else {
+        var resultOfSearchedName = "Oops!, we don't know this person!"
+      }
+    }
+    res.render('greetings/counter', {
+      resultOfSearchedName
+    })
+
+  });
+});
+// app.get('/greetings', greetingRoutes.index);
+// app.get('/greetings/add', greetingRoutes.addScreen);
+// app.post('/greetings/add/', greetingRoutes.add);
 const port = process.env.PORT || 3000;
 
 app.listen(port, function() {
   console.log('web app started on port : ' + port);
 });
-//
-// app.get('/api/users/:name', function(req, res) {
-//     var user_id = req.param('id');
-//     var token = req.param('token');
-//     var geo = req.param('geo');
-//
-//     res.send('What is up ' + req.name + '!');
-// });
-// //POST http://localhost:8080/api/users
-// app.post('/api/users', function(req, res) {
-//     var user_id = req.body.id;
-//     var token = req.body.token;
-//     var geo = req.body.geo;
-//
-//     res.send(user_id + ' ' + token + ' ' + geo);
-//
-// });
-//
-//
-// //routes with params:
-// // req.get('/urls/:param_one/url_part2/:param_two', function(req, res){
-// app.get('/products/:name', function(req, res) {
-//     console.log(req.params.id);
-//     res.send("hello : " + req.params.name);
-// });
-//
-//
-// //start the server:
-// app.listen(port);
-// console.log('Server started! At http://localhost:' + port);
-//
-// var server = app.listen(3000, function() {
-//     var host = server.address().address;
-//     var port = server.address().port;
-//
-//     console.log('Greetings app listening at http://%s:%s', host, port);
-//
-// });
