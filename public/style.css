@@ -1,11 +1,10 @@
 body {
-  background-color: #808080;
+  background-color: #807333;
   align: 0 auto;
 }
 
 div.output {
   font-family: sans-serif;
-  ;
   font-size: 25px;
   height: 100px;
   width: 0 auto;
@@ -40,8 +39,6 @@ div.footerB {
   background-color: #123;
   width: auto;
   padding: 0.4em;
-
-
 }
 
 div.footer2 {
@@ -84,7 +81,7 @@ div.container {
 
 div.input {
   background-color: white;
-  border-radius: 1em;
+  border-radius: 10em;
   border-style: solid;
   height: 15em;
   align-content: center;
@@ -126,9 +123,9 @@ ul, li {
   float: right;
 }
 
-input {
-  padding: 0.2em;
-  border-radius: 25em;
+.input {
+  padding: 0.5em;
+  border-radius: 35em;
   width: 6.5em;
   border-style: solid;
   color: blue;
@@ -159,11 +156,12 @@ input {
 
 .radios {
   font-family: sans-serif;
+  color: white;
 }
 
 .radios:hover {
   background-color: #39698A;
-  color: #FfFfFf;
+  color: #39698A;
   border: 4.5px solid #39698A;
   cursor: pointer;
   -webkit-transition: 200ms ease-in-out;

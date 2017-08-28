@@ -7,8 +7,10 @@ const bodyParser = require('body-parser');
 const flash = require('express-flash');
 const session = require('express-session');
 
-//const Models = require('./models');
-//const models = Models('mongodb://localhost/greetings');
+const Models = require('./models');
+
+const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/greetings";
+const models = Models(mongoURL);
 
 app.use(flash());
 app.use(express.static('public'));
@@ -35,49 +37,18 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
-// var mongoDB = 'mongodb://localhost/greetings';
-// mongoose.connect(mongoDB);
-
-const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/greetings";
-console.log(mongoURL);
-
-mongoose.connect(mongoURL, {
-  useMongoClient : true
-});
-
-
 //var MongoClient = require('mongodb').MongoClient,
 var format = require('util').format;
-
-var nameSchema = Schema({
-  name: String,
-  amount: Number
-});
 
 var sessionNames = [];
 var counter;
 var language;
 
-const namesGreeted = mongoose.model('namesGreeted', nameSchema);
+const NamesGreeted = models.Greeting;
 
-// const greetedNames = [];
-// app.get('/greetings/add/:name', function(req, res) {
-//
-//     if (greetedNames[req.params.name]) {
-//         greetedNames[req.params.name]++;
-//     } else {
-//        greetedNames.push(req.params.name)
-//         greetedNames[req.params.name] = 1;
-//     }
-//     console.log('greetedNames',greetedNames);
-//     res.send('<h1>hello, ' + req.params.name);
-// });
 app.get('/', function(req, res, next) {
 
-  namesGreeted.distinct('name', function(err, results) {
+  NamesGreeted.distinct('name', function(err, results) {
     if (sessionNames[0] !== undefined) {
       var lastName = sessionNames.length - 1;
       var namesForGreeting = sessionNames[lastName].name;
@@ -115,14 +86,14 @@ app.post('/', function(req, res, next) {
   }
 
   if (greetBtn) {
-    namesGreeted.findOne({
+    NamesGreeted.findOne({
       name: req.body.greeting
     }, function(err, searchName) {
       if (err) {
         return next(err)
       } else {
         if (!searchName && (req.body.greeting !== "")) {
-          var newName = new namesGreeted({
+          var newName = new NamesGreeted({
             name: req.body.greeting,
             amount: 1
           });
@@ -134,7 +105,7 @@ app.post('/', function(req, res, next) {
           })
         } else {
 
-          namesGreeted.update({
+          NamesGreeted.update({
             name: req.body.greeting
           }, {
             $inc: {
@@ -147,7 +118,7 @@ app.post('/', function(req, res, next) {
       }
     })
   } else if (resetButton) {
-    namesGreeted.remove({}, function(err) {
+    NamesGreeted.remove({}, function(err) {
       if (err) {
         return next(err);
       }
@@ -162,12 +133,12 @@ app.post('/', function(req, res, next) {
 
 app.get('/greeted', function(req, res, next) {
   var xx;
-  namesGreeted.distinct('name', function(err, results) {
+  NamesGreeted.distinct('name', function(err, results) {
     if (err) {
       return next(err);
     } else {
       res.render('greetings/greeted', {
-        namesGreeted: results
+        NamesGreeted: results
       });
 
     }
@@ -175,7 +146,7 @@ app.get('/greeted', function(req, res, next) {
 });
 
 app.get('/counter/:name', function(req, res, next) {
-  namesGreeted.findOne({
+  NamesGreeted.findOne({
     name: req.params.name
   }, function(err, greeting) {
     if (err) {
@@ -193,9 +164,7 @@ app.get('/counter/:name', function(req, res, next) {
 
   });
 });
-// app.get('/greetings', greetingRoutes.index);
-// app.get('/greetings/add', greetingRoutes.addScreen);
-// app.post('/greetings/add/', greetingRoutes.add);
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, function() {

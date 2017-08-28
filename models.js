@@ -3,7 +3,11 @@ module.exports = function(mongoUrl) {
   mongoose.connect(mongoUrl);
 
 
-    const GreetingSchema = mongoose.Schema({name : String});
+    const GreetingSchema = mongoose.Schema({
+      name : String,
+      amount : Number
+    });
+
     GreetingSchema.index({name : 1}, {unique : true});
 
   var Greeting = mongoose.model('Greeting', GreetingSchema);
