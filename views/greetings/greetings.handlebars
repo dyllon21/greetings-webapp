@@ -14,21 +14,15 @@
 <body>
   <div class='header'>
     <h1>Greet Web Form</h1>
-    <a href='/greeted'>People Greeted So Far</a>
+    <a href='/greeted'><b>People <em>Greeted</em> So Far</b></a>
   </div>
   <br>
+
   {{#if messages.error}}
     <div class='error'>
       <h2>{{messages.error}}</h2>
     </div>
   {{/if}}
-
-  {{#if messages.success}}
-    <div class='success'>
-      <h2>{{messages.success}}</h2>
-    </div>
-  {{/if}}
-
 
   <form class='' action='/' method='POST'>
     <div class='field2'>
@@ -37,17 +31,19 @@
     <br>
     <div class='container'>
       <label class='radios'>
-          <input type="radio" name="language" value='english'>English</label> |
+          <input type="radio" name="language" value='english'>ENGLISH</label>
       <label class='radios'>
-          <input type="radio" name="language" value='afrikaans'>Afrikaans</label> |
+          <input type="radio" name="language" value='afrikaans'>AFRIKAANS</label>
       <label class='radios'>
-          <input type="radio" name="language" value='colombia'>Colombia</label>
+          <input type="radio" name="language" value='colombia'>COLOMBIA</label>
       <br>
     </div>
     <div class='theBtn'>
       <input type='submit' name='greetBtn' value='Greet Me!'> |
-      <input name='resetButton' type='submit' value='reset greet history' class='button'>
+      <input name='resetButton' type='submit' value='reset history' class='theResetBtn'>
     </div>
+
+    <hr>
     <div class='counter'>
       <h2>counter : {{amount}}</h2>
     </div>
@@ -59,8 +55,3 @@
   </ul>
   </div>
 </body>
-<!-- <h1>Add A Greeting</h1>
-<form class='' action='/greetings/add' method='post'>
-  <input type='text' name='greeting' placeholder="type your name here">
-  <input type="submit" name="" value="Greet">
-</form> -->

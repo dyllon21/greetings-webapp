@@ -1,10 +1,11 @@
-/*body {
+body {
   background-color: #808080;
   align: 0 auto;
-}*/
+}
 
-div.output{
-  font-family: sans-serif;;
+div.output {
+  font-family: sans-serif;
+  ;
   font-size: 25px;
   height: 100px;
   width: 0 auto;
@@ -13,6 +14,7 @@ div.output{
   background-color: #000;
   padding-top: 10px;
 }
+
 div.header {
   /*align-content: center;*/
   /*float: center;*/
@@ -24,7 +26,25 @@ div.header {
   font-size-adjust: auto;
   border-spacing: 12em;
 }
-div.footer{
+
+div.footer {
+  padding: 1em;
+  color: white;
+  background-color: black;
+  text-align: center;
+  font-family: sans-serif;
+  font-size-adjust: auto;
+  border-spacing: 12em;
+}
+div.footerB {
+  background-color: #123;
+  width: auto;
+  padding: 0.4em;
+
+
+}
+
+div.footer2 {
   padding: 1em;
   color: white;
   background-color: black;
@@ -53,14 +73,15 @@ h2 {
 .error {
   color: red;
 }
+
 div.container {
   align: center;
   clear: none;
   display: inline;
   padding-left: 5em;
   float: center;
-
 }
+
 div.input {
   background-color: white;
   border-radius: 1em;
@@ -105,10 +126,10 @@ ul, li {
   float: right;
 }
 
-.input {
-  padding: 0.3em;
-  border-radius: 5em;
-  width: 12em;
+input {
+  padding: 0.2em;
+  border-radius: 25em;
+  width: 6.5em;
   border-style: solid;
   color: blue;
 }
@@ -122,11 +143,30 @@ ul, li {
 
 .theBtn {
   border-radius: 20em;
-  color: #000;
+  color: #39698A;
   font-family: sans-serif;
+}
 
+.theBtn:hover {
+  background-color: #39698A;
+  color: #FfFfFf;
+  border: 5px solid #39698A;
+  cursor: pointer;
+  -webkit-transition: 300ms ease-in-out;
+  -moz-transition: 300ms ease-in-out;
+  transition: 300ms ease-in-out;
 }
 
 .radios {
-font-family: sans-serif;
+  font-family: sans-serif;
+}
+
+.radios:hover {
+  background-color: #39698A;
+  color: #FfFfFf;
+  border: 4.5px solid #39698A;
+  cursor: pointer;
+  -webkit-transition: 200ms ease-in-out;
+  -moz-transition: 200ms ease-in-out;
+  transition: 200ms ease-in-out;
 }

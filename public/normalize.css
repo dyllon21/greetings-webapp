@@ -6,12 +6,11 @@
  *    user zoom.
  */
 
-html {
+/*html {
   font-family: sans-serif; /* 1 */
   -ms-text-size-adjust: 100%; /* 2 */
   -webkit-text-size-adjust: 100%; /* 2 */
-
-}
+}*/
 
 /**
  * Remove default margin.
@@ -268,7 +267,7 @@ textarea {
   color: #FFF000; /* 1 */
   font: monospace; /* 2 */
   margin: 0 auto; /* 3 */
-  border-radius: 5em;
+  border-radius: 25em;
 
 }
 
@@ -278,6 +277,7 @@ textarea {
 
 button:hover {
   overflow:visible;
+
 }
 
 /**
@@ -306,8 +306,9 @@ html input[type="button"], /* 1 */
 input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button; /* 2 */
-  cursor: pointer; /* 3 */
+  cursor: pointer;  /* 3 */
   align-content: center;
+  border-radius: 25em;
 }
 
 /**

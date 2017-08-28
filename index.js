@@ -39,6 +39,10 @@ var Schema = mongoose.Schema;
 var mongoDB = 'mongodb://localhost/greetings-webapp';
 mongoose.connect(mongoDB);
 
+const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/test'";
+mongoose.connect(mongoURL);
+
+
 var MongoClient = require('mongodb').MongoClient,
   format = require('util').format;
 
@@ -102,19 +106,6 @@ app.post('/', function(req, res, next) {
   };
   if (!greeting || !greeting.name) {
     req.flash('error', 'Name Field Should Not Be Blank!')
-  } else {
-    models.Greeting.create(greeting, function(err, results) {
-      if (err) {
-        if (err.code === 11000) {
-          req.flash('error', 'Name Already Exists!')
-        } else {
-          return next(err);
-          res.redirect('/');
-        }
-      } else {
-        req.flash('success', 'Name Successfully Added!');
-      }
-    });
   }
 
   if (greetBtn) {
@@ -144,9 +135,7 @@ app.post('/', function(req, res, next) {
               amount: 1
             }
           }, function(err) {
-            if (err) {
-              console.log('update not functioning');
-            }
+            if (err) {}
           });
         }
       }
@@ -154,11 +143,9 @@ app.post('/', function(req, res, next) {
   } else if (resetButton) {
     namesGreeted.remove({}, function(err) {
       if (err) {
-        if (err) {
-          return next(err);
-        }
-        // return console.log(err);
+        return next(err);
       }
+      // return console.log(err);
     })
   };
   var message = message + req.body.greeting;
