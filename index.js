@@ -6,9 +6,9 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const flash = require('express-flash');
 const session = require('express-session');
-const Models = require('./models');
 
-const models = Models('mongodb://localhost/greetings');
+//const Models = require('./models');
+//const models = Models('mongodb://localhost/greetings');
 
 app.use(flash());
 app.use(express.static('public'));
@@ -26,7 +26,9 @@ app.use(session({
   secret: 'keyboard cat',
   cookie: {
     maxAge: 60000 * 30
-  }
+  },
+  resave: true,
+  saveUninitialized: true
 }));
 app.engine('handlebars', exphbs({
   defaultLayout: 'main'
@@ -36,15 +38,19 @@ app.set('view engine', 'handlebars');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// var mongoDB = 'mongodb://localhost/greetings-webapp';
+// var mongoDB = 'mongodb://localhost/greetings';
 // mongoose.connect(mongoDB);
 
-const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/greetings'";
-mongoose.connect(mongoURL);
+const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/greetings";
+console.log(mongoURL);
+
+mongoose.connect(mongoURL, {
+  useMongoClient : true
+});
 
 
-var MongoClient = require('mongodb').MongoClient,
-  format = require('util').format;
+//var MongoClient = require('mongodb').MongoClient,
+var format = require('util').format;
 
 var nameSchema = Schema({
   name: String,
