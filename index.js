@@ -36,10 +36,10 @@ app.set('view engine', 'handlebars');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var mongoDB = 'mongodb://localhost/greetings-webapp';
-mongoose.connect(mongoDB);
+// var mongoDB = 'mongodb://localhost/greetings-webapp';
+// mongoose.connect(mongoDB);
 
-const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/test'";
+const mongoURL = process.env.MONGO_DB_URL || "'mongodb://localhost/greetings'";
 mongoose.connect(mongoURL);
 
 
@@ -190,7 +190,7 @@ app.get('/counter/:name', function(req, res, next) {
 // app.get('/greetings', greetingRoutes.index);
 // app.get('/greetings/add', greetingRoutes.addScreen);
 // app.post('/greetings/add/', greetingRoutes.add);
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, function() {
   console.log('web app started on port : ' + port);
