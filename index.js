@@ -68,20 +68,20 @@ app.post('/', function(req, res, next) {
   var greetBtn = req.body.greetBtn;
   var message = '';
 
-  if (req.body.language === 'colombia') {
+  if (req.body.language === 'colombia' ) {
     message = 'Buenos Dias, '
   } else if (req.body.language === 'english') {
     message = 'Hello, '
   } else if (req.body.language === 'afrikaans') {
     message = 'Hallo, ';
-  } else if (req.body.language === undefined) {
+  } else if (req.body.language === undefined && greetBtn) {
     message = 'please select a Language!'
   }
 
   var greeting = {
     name: req.body.greeting
   };
-  if (!greeting || !greeting.name) {
+  if (!greeting || !greeting.name && greetBtn) {
     req.flash('error', 'Name Field Should Not Be Blank!')
   }
 
